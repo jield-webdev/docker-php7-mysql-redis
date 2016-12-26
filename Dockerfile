@@ -36,6 +36,10 @@ RUN \
   echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections && \
   apt-get install -y mysql-server mysql-client && \
   apt-get autoclean && apt-get clean && apt-get autoremove
+  
+# Install REDIS
+RUN \
+ service redis-server start
 
 # Install PHP
 RUN \

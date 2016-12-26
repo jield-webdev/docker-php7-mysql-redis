@@ -39,12 +39,13 @@ RUN \
   
 # Install REDIS
 RUN \
+ apt-get install redis-server && \
  service redis-server start
 
 # Install PHP
 RUN \
   apt-get update && \
-  apt-get install -y git zip redis-server && \
+  apt-get install -y git zip && \
   apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php7.0-xdebug php7.0-zip php7.0-xml php7.0-redis && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 

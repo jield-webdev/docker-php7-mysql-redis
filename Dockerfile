@@ -17,6 +17,11 @@ RUN \
  /usr/sbin/update-locale LANG=en_US.UTF-8 && \
  update-ca-certificates && \
  apt-get autoclean && apt-get clean && apt-get autoremove
+ 
+#Setup SSH credentials for GitHub
+RUN \
+ ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P "" && \
+ ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts
 
 # Add the PHP 7 repo
 RUN \

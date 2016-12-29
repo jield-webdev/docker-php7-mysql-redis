@@ -41,8 +41,10 @@ RUN \
 RUN \
   apt-get update && \
   apt-get install -y redis-server && \
-  redis-server && \
   apt-get autoclean && apt-get clean && apt-get autoremove
+  
+EXPOSE      6379
+ENTRYPOINT  ["/usr/bin/redis-server"]  
 
 # Install PHP
 RUN \

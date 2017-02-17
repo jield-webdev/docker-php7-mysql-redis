@@ -28,7 +28,7 @@ RUN \
 RUN \
     echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
     apt-get update && \
-    apt-get -y -t jessie-backports install libssl1.0.0 && \
+    apt-get --yes --force-yes -t jessie-backports install libssl1.0.0 && \
     echo "deb http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb-src http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \ 

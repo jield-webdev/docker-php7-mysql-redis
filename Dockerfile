@@ -28,7 +28,7 @@ RUN \
 RUN \
     echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
     apt-get update && \
-    apt-get -t jessie-backports install "libssl1.0.0" && \
+    apt-get -t jessie-backports install -y "libssl1.0.0" && \
     echo "deb http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb-src http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \ 
@@ -36,7 +36,7 @@ RUN \
     curl https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
     apt-get update && \
     apt-get upgrade && \
-    apt-get install nginx-full
+    apt-get install -y nginx-full
 
 #Setup SSH credentials for GitHub
 RUN \

@@ -35,7 +35,7 @@ RUN \
     curl https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
     apt-get update && \
     apt-get upgrade && \
-    apt-get install -y nginx-full
+    apt-get install -y nginx
 
 #Setup SSH credentials for GitHub
 RUN \

@@ -11,23 +11,36 @@ ENV LANGUAGE en_US:en
 # Base
 RUN \
  apt-get update && \
- apt-get -y --no-install-recommends install locales apt-utils curl ca-certificates openssh-client && \
+ apt-get -y --no-install-recommends install locales apt-transport-https lsb-release apt-utils curl ca-certificates openssh-client && \
  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
  locale-gen en_US.UTF-8 && \
  /usr/sbin/update-locale LANG=en_US.UTF-8 && \
  update-ca-certificates && \
  apt-get autoclean && apt-get clean && apt-get autoremove
  
+#sury resources
+RUN \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+    apt-get update
+    
+#Install nginx-full
+RUN \
+    echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
+    apt-get -t jessie-backports install "libssl1.0.0" && \
+    echo "deb http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb-src http://packages.dotdeb.org jessie-nginx-http2 all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \ 
+    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \ 
+    curl https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
+    apt-get update && \
+    apt-get upgrade && \
+    apt-get install nginx-full
+
 #Setup SSH credentials for GitHub
 RUN \
  ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P "" && \
  ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts
-
-# Add the PHP 7 repo
-RUN \
-  echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list && \
-  echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list && \
-  curl https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 # Install MySQL
 RUN \
@@ -43,14 +56,11 @@ RUN \
   apt-get install -y redis-server && \
   apt-get autoclean && apt-get clean && apt-get autoremove
   
-EXPOSE      6379
-ENTRYPOINT  ["/usr/bin/redis-server"]  
-
 # Install PHP
 RUN \
   apt-get update && \
   apt-get install -y git zip && \
-  apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php7.0-xdebug php7.0-zip php7.0-xml php7.0-redis && \
+  apt-get install -y php7.1-mysqlnd php7.1-cli php7.1-sqlite php7.1-mbstring php7.1-mcrypt php7.1-curl php7.1-intl php7.1-gd php7.1-zip php7.1-xml php7.1-redis && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
 # Install composer

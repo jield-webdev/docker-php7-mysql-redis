@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM debian:jessie
 
 # With inspiration from https://github.com/punkstar/bitbucket-pipelines-php7-mysql
 

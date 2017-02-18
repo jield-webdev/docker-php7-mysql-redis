@@ -32,7 +32,7 @@ RUN \
 
 #Install nginx-full
 RUN \
-    apt-get -t -y jessie-backports install "libssl1.0.0" && \
+    apt-get -y -t jessie-backports install "libssl1.0.0" && \
     apt-get install -y nginx-full
 
 #Setup SSH credentials for GitHub
@@ -62,3 +62,14 @@ RUN \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/bin
+
+#Install SOLR
+RUN \
+  wget http://apache.40b.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
+  echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
+  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
+  apt-get -y update && \
+  apt-get -y install oracle-java8-installer && \
+  tar -zxvf solr-6.4.1.tgz && \
+  ./solr-6.4.0/bin/install_solr_service.sh solr-6.4.0.tgz

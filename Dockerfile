@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:sid
 
 # With inspiration from https://github.com/punkstar/bitbucket-pipelines-php7-mysql
 
@@ -53,7 +53,7 @@ RUN \
 # Install PHP
 RUN \
   apt-get install -y git zip && \
-  apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-intl php7.1-redis php7.1.gd php7.1-mcrypt php7.1-igbinary php7.1-mysql php7.1-mbstring php7.1-zip php7.1-xml php7.1-curl php7.1-json php7.1-opcache php7.1-readline php7.1-soap
+  apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-intl php7.1-redis php7.1-gd php7.1-mcrypt php7.1-igbinary php7.1-mysql php7.1-mbstring php7.1-zip php7.1-xml php7.1-curl php7.1-json php7.1-opcache php7.1-readline php7.1-soap
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/bin
@@ -67,5 +67,5 @@ RUN \
 
   #Cleanup apt
 RUN \
-  apt-get autoclean && apt-get clean && apt-get autoremove && \
+  apt-get autoclean && apt-get clean && apt-get autoremove
 

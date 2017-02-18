@@ -61,7 +61,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --in
 #Install SOLR
 RUN \
   wget http://apache.cs.uu.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
-  apt-get -y install openjdk-8-jre-headless && \
+  apt-get -y install ca-certificates-java openjdk-8-jre-headless && \
   tar -zxvf solr-6.4.1.tgz && \
   ./solr-6.4.0/bin/install_solr_service.sh solr-6.4.0.tgz
 

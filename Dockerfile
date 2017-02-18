@@ -32,6 +32,7 @@ RUN \
 
 #Install nginx-full
 RUN \
+    apt-get -t -y jessie-backports install "libssl1.0.0" && \
     apt-get install -y nginx-full
 
 #Setup SSH credentials for GitHub

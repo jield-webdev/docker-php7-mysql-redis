@@ -63,7 +63,7 @@ RUN \
   wget http://apache.cs.uu.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
   apt-get -y install default-jre && \
   tar -zxvf solr-6.4.1.tgz && \
-  ./solr-6.4.1/bin/install_solr_service.sh solr-6.4.0.tgz
+  ./solr-6.4.1/bin/install_solr_service.sh solr-6.4.1.tgz
 
   #Cleanup apt
 RUN \

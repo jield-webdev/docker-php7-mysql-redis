@@ -61,11 +61,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --in
 #Install SOLR
 RUN \
   wget http://apache.cs.uu.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
-  echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
-  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
-  apt-get -y update && \
-  apt-get -y install oracle-java8-installer && \
+  apt-get -y install openjdk-8-jre-headless && \
   tar -zxvf solr-6.4.1.tgz && \
   ./solr-6.4.0/bin/install_solr_service.sh solr-6.4.0.tgz
 

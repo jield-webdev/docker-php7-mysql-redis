@@ -60,7 +60,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --in
 
 #Install SOLR
 RUN \
-  wget http://apache.40b.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
+  wget http://apache.cs.uu.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
   echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
   echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \

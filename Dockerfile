@@ -53,19 +53,21 @@ RUN \
 # Install PHP
 RUN \
   apt-get install -y git zip && \
-  apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-intl php7.1-redis php7.1-gd php7.1-mcrypt php7.1-igbinary php7.1-mysql php7.1-mbstring php7.1-zip php7.1-xml php7.1-curl php7.1-json php7.1-opcache php7.1-readline php7.1-soap
+  apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-intl php7.1-redis php7.1-gd php7.1-mcrypt php7.1-ldap php7.1-igbinary php7.1-mysql php7.1-mbstring php7.1-zip php7.1-xml php7.1-curl php7.1-json php7.1-opcache php7.1-readline php7.1-soap
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/bin
 
 #Install SOLR
 RUN \
-  wget http://apache.cs.uu.nl/lucene/solr/6.4.1/solr-6.4.1.tgz && \
+  wget http://apache.cs.uu.nl/lucene/solr/6.6.0/solr-6.6.0.tgz && \
   apt-get -y -t jessie-backports install openjdk-8-jre-headless && \
-  tar -zxvf solr-6.4.1.tgz && \
-  ./solr-6.4.1/bin/install_solr_service.sh solr-6.4.1.tgz
+  tar -zxvf solr-6.6.0.tgz && \
+  ./solr-6.6.0/bin/install_solr_service.sh solr-6.6.0.tgz
+
+RUN apt-get install certbot -y -t jessie-backports
 
   #Cleanup apt
 RUN \
-  apt-get autoclean && apt-get clean && apt-get autoremove
+  apt-get -y autoclean && apt-get -y clean && apt-get -y autoremove
 
